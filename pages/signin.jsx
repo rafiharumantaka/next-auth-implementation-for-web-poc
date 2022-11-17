@@ -1,8 +1,9 @@
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function SignInPage() {
+  const { status } = useSession();
   const router = useRouter();
 
   const [postData, setPostData] = useState({
@@ -31,6 +32,13 @@ function SignInPage() {
       router.push('/secret');
     }
   };
+
+  useEffect(() => {
+    console.log('status', status)
+    if (status === "authenticated") {
+      router.replace('/secret');
+    }
+  }, [status]);
 
   return (
     <div>
