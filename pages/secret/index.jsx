@@ -6,8 +6,6 @@ function SecretPage() {
   const { status, data } = useSession();
   const router = useRouter();
 
-  console.log({status, data});
-
   const callGetSessionAndPrintResult = async () => {
     const token = await getCsrfToken();
     const session = await getSession();
@@ -35,7 +33,7 @@ function SecretPage() {
         <pre>{JSON.stringify({ status, data })}</pre>
       </div>
       <div style={{ marginTop: '16px' }}>
-        <button onClick={() => {signOut({ callbackUrl: 'https://google.com' })}}>Sign out</button>
+        <button onClick={() => {signOut({ redirect: false })}}>Sign out</button>
       </div>
       <div style={{ marginTop: '16px' }}>
         <button onClick={() => { callGetSessionAndPrintResult() }}>Print session data</button>
