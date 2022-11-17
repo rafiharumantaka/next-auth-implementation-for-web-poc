@@ -1,9 +1,6 @@
 import NextAuth from 'next-auth/next';
 import Credentials from 'next-auth/providers/credentials';
 
-const useSecureCookies = !!process.env.NEXTAUTH_URL
-const cookiePrefix = "asdsad";
-
 export const authOptions = {
   session: {
     strategy: 'jwt',
@@ -39,6 +36,11 @@ export const authOptions = {
   pages: {
     signIn: '/signin',
   },
+  /**This is for setting the custom cookies key name, and must contain these 3 items
+   * - sessionToken
+   * - callbackUrl
+   * - csrfToken
+   * or it won't work */
   cookies: {
     sessionToken: {
       name: "POC.session-token",
